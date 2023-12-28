@@ -69,7 +69,7 @@ const Register = () => {
                 position: "top-center"
             });
         } else {
-            // console.log("user registration succesfully done");
+            console.log("user registration succesfully done");
 
 
             const data = await fetch("/register", {
