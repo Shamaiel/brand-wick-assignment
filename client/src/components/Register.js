@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./mix.css"
 
+
 const Register = () => {
+
+    const navigate =   useNavigate()
 
     const [passShow, setPassShow] = useState(false);
     const [cpassShow, setCPassShow] = useState(false);
@@ -69,10 +72,10 @@ const Register = () => {
                 position: "top-center"
             });
         } else {
-            console.log("user registration succesfully done");
+            // console.log("user registration succesfully done");
 
 
-            const data = await fetch("/register", {
+            const data = await fetch("http://localhost:8000/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -91,6 +94,7 @@ const Register = () => {
                 });
                 setInpval({ ...inpval, fname: "", email: "", password: "", cpassword: "" });
             }
+            navigate("/login")
         }
     }
 

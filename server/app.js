@@ -14,9 +14,9 @@ app.use(cors());
 app.use(router);
 
 
-app.get("/", (req, res)=>{
-    res.status(201).json("sever running")
-})
+// app.get("/", (req, res)=>{
+//     res.status(201).json("sever running")
+// })
 
 
 
