@@ -9,7 +9,8 @@ const Register = () => {
     const [passShow, setPassShow] = useState(false);
     const [cpassShow, setCPassShow] = useState(false);
 
-    const [inpval, setInpval] = useState({
+    const [inpval, setInpval] = useState(
+        {
         fname: "",
         email: "",
         password: "",
@@ -99,8 +100,7 @@ const Register = () => {
                 <div className="form_data">
                     <div className="form_heading">
                         <h1>Sign Up</h1>
-                        <p style={{ textAlign: "center" }}>We are glad that you will be using Project Cloud to manage <br />
-                            your tasks! We hope that you will get like it.</p>
+                        <p style={{ textAlign: "center" }}>Fulfill your Tech needs with The Brand Wick.</p>
                     </div>
 
                     <form>
@@ -112,6 +112,8 @@ const Register = () => {
                             <label htmlFor="email">Email</label>
                             <input type="email" onChange={setVal} value={inpval.email} name="email" id="email" placeholder='Enter Your Email Address' />
                         </div>
+                      
+                      
                         <div className="form_input">
                             <label htmlFor="password">Password</label>
                             <div className="two">
