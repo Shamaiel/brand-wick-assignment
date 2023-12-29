@@ -33,8 +33,16 @@ router.post("/register", async (req, res) => {
 
             const storeData = await finalUser.save();
 
-            // console.log(storeData);
-            res.status(201).json({ status: 201, storeData })
+         
+// ------>
+            const token = jwt.sign({ userId: storeData._id }, process.env.SECRET_KEY, { expiresIn: '1d' });
+
+            // Sending the token in the response
+            res.status(201).json({ status: 201, storeData, token });
+
+
+
+
         }
 
     } catch (error) {
@@ -63,26 +71,41 @@ router.post("/login", async (req, res) => {
 
         if(userValid){
 
-            const isMatch = await bcrypt.compare(password,userValid.password);
+            const isMatch = await bcrypt.compare(password, userValid.password);
 
             if(!isMatch){
                 res.status(422).json({ error: "invalid details"})
             }else{
 
-                // token generate
-                const token = await userValid.generateAuthtoken();
+                const token = jwt.sign({ userId: userValid._id }, process.env.SECRET_KEY, { expiresIn: '1d' });
 
-                // cookiegenerate
-                res.cookie("usercookie",token,{
-                    expires:new Date(Date.now()+9000000),
-                    httpOnly:true
+                // Sending the token in the response
+                res.cookie("usercookie", token, {
+                    expires: new Date(Date.now() + 9000000),
+                    httpOnly: true
                 });
-
+    
                 const result = {
                     userValid,
                     token
-                }
-                res.status(201).json({status:201,result})
+                };
+    
+                res.status(201).json({ status: 201, result });
+
+                // // token generate
+                // const token = await userValid.generateAuthtoken();
+
+                // // cookiegenerate
+                // res.cookie("usercookie",token,{
+                //     expires:new Date(Date.now()+9000000),
+                //     httpOnly:true
+                // });
+
+                // const result = {
+                //     userValid,
+                //     token
+                // }
+                // res.status(201).json({status:201,result})
             }
         }
 
